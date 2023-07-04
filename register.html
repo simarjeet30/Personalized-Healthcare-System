@@ -1,0 +1,132 @@
+<?php
+
+session_start();
+
+$conn = mysqli_connect('localhost:3306','abcd','looneytunes','minor');
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="website.css">
+<title>Register</title>
+<style>
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+tr:hover {background-color: rgb(33, 197, 115)}
+td {
+  height: 70px; width:300px;
+}
+.red {color:red;}
+</style>
+</head>
+
+<body>
+
+<header>
+        <h1>Personalised Healthcare System</h1>
+        <h4>Keep track of your health</h4>
+</header>
+
+<div class="navbar">
+<a href="website1.php" >Home</a>
+</div>
+
+<table>
+
+<tr><td><b>Register</b></td></tr>
+
+<form name="registration" method="post" action="check.php" onsubmit="return validate()">
+
+<tr>
+<td>Choose a user ID: (alphanumeric) </td>
+<td><input type=text name="uid"></td>
+<td id ='t1' class='red'></td>
+</tr>
+
+<tr>
+<td>Enter your name: </td>
+<td><input type=text name="uname"></td>
+<td id ='t2' class='red'></td>
+</tr>
+
+<tr>
+<td>Enter mobile number: </td>
+<td><input type=text name="uphone"></td>
+<td id ='t3' class='red'></td>
+</tr>
+
+<tr>
+<td>Choose a password: (5-10 characters) </td>
+<td><input type=password name="upass"></td>
+<td id ='t4' class='red'></td>
+</tr>
+
+<tr>
+<td>Re-enter password: </td>
+<td><input type=password name="upass2"></td>
+<td id ='t5' class='red'></td>
+</tr>
+
+<tr><td><input type=submit value="Register" name="reg" style="height:40px"></td></tr>
+
+</table>
+
+</form>
+
+<script>
+
+function validate ()
+{
+if (document.registration.uid.value=="") {
+document.getElementById('t1').innerText="Enter a valid ID"; return false;
+}
+else document.getElementById('t1').innerText="";
+
+if (document.registration.uname.value=="") {
+document.getElementById('t2').innerText="Enter your name"; return false;
+}
+else document.getElementById('t2').innerText="";
+
+if (document.registration.uphone.value=="") {
+document.getElementById('t3').innerText="Enter your phone no."; return false;
+}
+else document.getElementById('t3').innerText="";
+
+if (isNaN(document.registration.uphone.value)) {
+document.getElementById('t3').innerText="Enter a valid phone no."; return false;
+}
+else document.getElementById('t3').innerText="";
+
+if (document.registration.upass.value.length>10) {
+document.getElementById('t4').innerText="Enter a valid password"; return false;
+}
+else document.getElementById('t4').innerText="";
+
+if (document.registration.upass.value.length<5) {
+document.getElementById('t4').innerText="Enter a valid password"; return false;
+}
+else document.getElementById('t4').innerText="";
+
+if (document.registration.upass2.value!=document.registration.upass.value) {
+document.getElementById('t5').innerText="Passwords do not match"; return false;
+}
+else document.getElementById('t5').innerText="";
+
+return true;
+}
+
+</script>
+
+    <footer>
+        <a href="about.html">About</a>
+    </footer>
+
+</body>
+</html>
